@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import pickle
+import pickle #install pickle
 import numpy as np
 
 # ================== Config ==================
@@ -70,24 +70,7 @@ if st.button("🔮 Predict Price"):
     st.success(f"🏷️ Estimated House Price: **${prediction:,.2f}**")
     st.metric(label="Predicted Price", value=f"${prediction:,.0f}")
 
-    # ================== Similar Homes Chart ==================
-    st.subheader("📊 Price Distribution of Similar Homes")
 
-    # Check for 'price' column in your dataset
-    if 'price' in data.columns:
-        similar_homes = data[
-            (data['beds'] == processed_input['beds'][0]) &
-            (data['baths'] == processed_input['baths'][0]) &
-            (data['zip_code'] == processed_input['zip_code'][0])
-        ]
-
-        if not similar_homes.empty:
-            st.markdown(f"Found {len(similar_homes)} similar listings.")
-            st.bar_chart(similar_homes[['size', 'price']].set_index('size'))
-        else:
-            st.warning("No similar homes found in this zip code for selected features.")
-    else:
-        st.info("`price` column not found in dataset. Chart disabled.")
 # === Custom background color ===
 def set_bg_color(color="#f5f7fa"):
     st.markdown(
